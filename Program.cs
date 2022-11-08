@@ -111,3 +111,39 @@ string FindRowMinSum(int[,] arr){
         return $"Минимальная сумма элементов в строке(ах) № {result}";
     }
 
+/*Задача 58: Задайте две квадратные матрицы. 
+Напишите программу, которая будет находить произведение двух матриц.
+Например, даны 2 матрицы:
+2 4 | 3 4
+3 2 | 3 3
+Результирующая матрица будет:
+18 20
+15 18*/
+
+int size = new Random().Next(3, 5);
+Console.WriteLine("Первая матрица: ");
+int[,] matrix1 = GetArrayInt(size, size, 1, 5);
+PrintArrayInt(matrix1);
+Console.WriteLine("Вторая матрица: ");
+int[,] matrix2 = GetArrayInt(size, size, 1, 5);
+PrintArrayInt(matrix2);
+Console.WriteLine();
+int[,] resultMatrix = MultiplySquareMatrix(matrix1, matrix2);
+Console.WriteLine("Результат умножения матриц: ");
+PrintArrayInt(resultMatrix);
+Console.WriteLine();
+
+// метод перемножения квадратных матриц
+
+int[,] MultiplySquareMatrix(int [,] arr1, int [,] arr2){
+    int[,] result = new int[arr1.GetLength(0), arr1.GetLength(0)];
+    for (int i = 0; i < arr1.GetLength(0); i++){
+        for (int j = 0; j < arr1.GetLength(0); j++){
+            for (int k = 0; k < arr1.GetLength(0); k++){
+                result[i, j] += arr1[i, k] * arr2[k, j]; }
+        }
+    }
+    return result;
+
+}
+
