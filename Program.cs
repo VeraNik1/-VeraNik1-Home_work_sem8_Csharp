@@ -147,3 +147,132 @@ int[,] MultiplySquareMatrix(int [,] arr1, int [,] arr2){
 
 }
 
+// Задача 60. ...Сформируйте трёхмерный массив из 
+// неповторяющихся двузначных чисел. Напишите программу,
+// которая будет построчно выводить массив, добавляя индексы 
+// каждого элемента.
+// Массив размером 2 x 2 x 2
+// 66(0,0,0) 25(0,1,0)
+// 34(1,0,0) 41(1,1,0)
+// 27(0,0,1) 90(0,1,1)
+// 26(1,0,1) 55(1,1,1)
+
+
+Console.WriteLine("Введите размеры трехмерного массива:");
+Console.WriteLine("первый: ");
+int x = int.Parse(Console.ReadLine()!);
+Console.WriteLine("второй: ");
+int y = int.Parse(Console.ReadLine()!);
+Console.WriteLine("третий: ");
+int z = int.Parse(Console.ReadLine()!);
+int[,,] array60 = GetArrayThreeD(x, y, z);
+PrintArrayInt3D(array60);
+
+
+//получение 3-х мерного массива из двухзначных уникальных чисел
+int[,,] GetArrayThreeD(int n, int m, int p){
+    int[,,] result = new int[n, m, p];
+    int[] Temparray = GetUniqeNum(n, m, p);
+    if(Temparray[0] < 0){
+        Console.WriteLine("Количество элементов массива превышает количество уникальных двухзначных чисел. Поробуйте уменьшить размеры массива");
+        return new int[,,]{};}
+    else{
+    int index = 0;
+    while(index < n*m*p){
+        for (int i = 0; i < n; i++)
+            {for (int j = 0; j < m; j++)
+                {for (int k = 0; k < p; k++){
+                    result[i, j, k] = Temparray[index];
+                    index++;
+            }
+        }}}
+        return result;}
+        }
+ // метод для получения уникальных двухзначных чисел    
+ int[] GetUniqeNum(int n, int m, int p)
+ {  int index = 0;
+    int[] result = new int[n*m*p];
+    if(m*n*p > 90){
+        return new int[]{-1};
+    }
+    else{
+    while(index < n*m*p){
+    {int temp = new Random().Next(10, 100);
+        if(Array.IndexOf(result, temp) == -1){
+            result[index] = temp;
+            index++;
+        }
+ }}}
+ return result;}
+
+//метод печати 3-х мерного массива
+void PrintArrayInt3D(int[,,] array)
+{
+        for (int k = 0; k < array.GetLength(2); k++)
+            {for (int i = 0; i < array.GetLength(0); i++)
+                {for (int j = 0; j < array.GetLength(1); j++){
+        
+            Console.Write($"{array[i, j, k]}({i}, {j}, {k}) ");
+            }
+        Console.WriteLine();
+    }
+}
+}
+    
+
+// Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+// Например, на выходе получается вот такой массив:
+// 01 02 03 04
+// 12 13 14 05
+// 11 16 15 06
+// 10 09 08 07
+
+PrintIntArrayAsString(GetArraySpiral(4,4));
+
+int[,] GetArraySpiral(int n, int m){
+    int size = n * m;
+    int[,] result = new int[n, m];
+    int row = 0;
+    int col = 0;
+    int dx = 1;
+    int dy = 0;
+    int ChangeDirection = 0;
+    int count = m;
+    
+    for(int i = 0; i < size; i++){
+        result[row, col] = i + 1;
+        count--;
+    if(count == 0){
+        count = m * (ChangeDirection % 2) + n * ((ChangeDirection + 1) % 2) - (ChangeDirection / 2 + 1);
+        int temp = dx;
+        dx = -dy;
+        dy = temp;
+        ChangeDirection++;
+    }
+    col += dx;
+    row += dy;
+    }
+    return result;
+}
+void PrintIntArrayAsString(int[,] array)
+{   int size = array.GetLength(0)*array.GetLength(1);
+    int lenSize = (size.ToString()).Length;
+
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            if(array[i, j].ToString().Length < lenSize){
+                int index = 0;
+                while(index < lenSize - array[i, j].ToString().Length){
+                    Console.Write($"0");
+                    index++;
+                }
+            }
+        Console.Write($"{array[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+
