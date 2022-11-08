@@ -62,3 +62,52 @@ void PrintArrayInt(int[,] array)
         Console.WriteLine();
     }
 }
+
+/*Задача 56: Задайте прямоугольный двумерный массив.
+ Напишите программу, которая будет находить строку 
+с наименьшей суммой элементов.
+
+Например, задан массив:
+
+1 4 7 2
+
+5 9 2 3
+
+8 4 2 4
+
+5 2 6 7
+
+Программа считает сумму элементов в каждой строке и выдаёт 
+номер строки с наименьшей суммой элементов: 1 строка*/
+
+int row56 = new Random().Next(3, 5);
+int col56= new Random().Next(3, 5);
+Console.WriteLine("Сгенерированный массив: ");
+int[,] array56 = GetArrayInt(row56, col56, 1, 9);
+PrintArrayInt(array56);
+Console.WriteLine();
+Console.WriteLine(FindRowMinSum(array56));
+
+
+//метод нахождения столбца с минимальной суммой
+
+string FindRowMinSum(int[,] arr){
+    string result = "";
+    int minsum = 10000000;
+    for (int i = 0; i < arr.GetLength(0); i++){
+        int total = 0;
+        for (int j = 0; j < arr.GetLength(1); j++){
+            total += arr[i, j];
+        }
+        //Console.WriteLine(total); // для контроля)
+        if(total < minsum){
+            minsum = total;
+            result = $"{i + 1}";}
+        else if(total == minsum){
+            result += $", {i + 1}";
+
+        }
+        }
+        return $"Минимальная сумма элементов в строке(ах) № {result}";
+    }
+
