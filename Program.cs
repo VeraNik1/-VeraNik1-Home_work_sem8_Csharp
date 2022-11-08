@@ -288,10 +288,10 @@ int[,] array59 = GetArrayInt(rowArr, columnArr, 1, 9);
 PrintArrayInt(array59);
 Console.WriteLine();
 Console.WriteLine("Массив с отстортированными нечетными столбцами: ");
-int[,] array59sorted = SortOddColumns(array59);
-PrintArrayInt(array59sorted);
+SortOddColumns(array59);
+PrintArrayInt(array59);
 
-int[,] SortOddColumns(int[,] arr){
+void SortOddColumns(int[,] arr){
      for (int j = 0; j < arr.GetLength(1); j+=2){
         for (int i = 0; i < arr.GetLength(0); i++){
             for(int k = i + 1; k < arr.GetLength(0); k++){
@@ -302,6 +302,5 @@ int[,] SortOddColumns(int[,] arr){
                 }
             }
       }}
-      return arr;
-    
+          
 }
