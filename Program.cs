@@ -14,7 +14,7 @@
 int rowAr = new Random().Next(5, 10);
 int columnAr = new Random().Next(5, 10);
 Console.WriteLine("Сгенерированный массив: ");
-int[,] array54 = GetArrayInt(rowAr, columnAr, 1, 10);
+int[,] array54 = GetArrayInt(rowAr, columnAr, 1, 9);
 PrintArrayInt(array54);
 Console.WriteLine();
 Console.WriteLine("Массив с отсортированными строками: ");
@@ -275,4 +275,33 @@ void PrintIntArrayAsString(int[,] array)
     }
 }
 
+/*Задача 59: Отсортировать
+ нечетные столбцы массива по возрастанию. 
+ Вывести массив изначальный и массив с 
+ отсортированными нечетными столбцами*/
 
+
+int rowArr = new Random().Next(3, 10);
+int columnArr = new Random().Next(3, 10);
+Console.WriteLine("Сгенерированный массив: ");
+int[,] array59 = GetArrayInt(rowArr, columnArr, 1, 9);
+PrintArrayInt(array59);
+Console.WriteLine();
+Console.WriteLine("Массив с отстортированными нечетными столбцами: ");
+int[,] array59sorted = SortOddColumns(array59);
+PrintArrayInt(array59sorted);
+
+int[,] SortOddColumns(int[,] arr){
+     for (int j = 0; j < arr.GetLength(1); j+=2){
+        for (int i = 0; i < arr.GetLength(0); i++){
+            for(int k = i + 1; k < arr.GetLength(0); k++){
+                if(arr[k, j] < arr[i, j]){
+                    int temp = arr[i, j];
+                    arr[i, j] = arr[k, j];
+                    arr[k, j] = temp;
+                }
+            }
+      }}
+      return arr;
+    
+}
